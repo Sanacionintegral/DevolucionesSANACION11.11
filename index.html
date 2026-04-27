@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sanación 11.11 - Reporte Premium Holístico v3.1</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+    <style>
+        :root { --oro: #d4af37; --rosa: #fce4ec; --rosa-fuerte: #f06292; --texto: #5d4037; --blanco: #ffffff; }
+        body { font-family: 'Montserrat', sans-serif; background: #fdf2f4; color: var(--texto); padding: 20px; }
+        .admin-panel { max-width: 1000px; background: white; padding: 40px; border-radius: 25px; margin: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid var(--rosa); }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        input, textarea, select { width: 100%; padding: 12px; border: 1px solid var(--rosa); border-radius: 10px; font-family: 'Montserrat'; background: #fffafd; font-size: 14px; }
+        label { display: block; font-weight: 600; margin: 10px 0 5px; color: var(--rosa-fuerte); font-size: 13px; text-transform: uppercase; }
+        .btn-magic { grid-column: span 2; background: var(--rosa-fuerte); color: white; padding: 20px; border: none; border-radius: 15px; font-weight: bold; cursor: pointer; font-size: 18px; font-family: 'Cinzel', serif; transition: 0.3s; margin-top: 20px; }
+        .btn-magic:hover { background: var(--oro); transform: translateY(-2px); }
+
+        /* DISEÑO PDF */
+        #pdf-render-area { position: absolute; left: -9999px; width: 210mm; }
+        .pdf-page { width: 210mm; height: 297mm; background: var(--blanco); padding: 15mm; box-sizing: border-box; position: relative; color: var(--texto); overflow: hidden; }
+        .inner-border { border: 2px solid var(--rosa); height: 100%; padding: 10mm; box-sizing: border-box; position: relative; display: flex; flex-direction: column; }
+        
+        .pdf-header { text-align: center; margin-bottom: 15px; border-bottom: 1px solid var(--rosa); padding-bottom: 10px; }
+        .pdf-header h1 { font-family: 'Cinzel', serif; color: var(--rosa-fuerte); margin: 0; font-size: 28px; letter-spacing: 4px; }
+        
+        .pdf-section-title { font-family: 'Cinzel', serif; color: var(--blanco); background: var(--rosa-fuerte); margin: 15px 0 10px; font-size: 13px; padding: 6px 15px; border-radius: 5px; }
+        .pdf-text { font-size: 12px; line-height: 1.6; text-align: justify; }
+        .negrita { font-weight: 700; color: var(--rosa-fuerte); }
+
+        /* IMÁGENES */
+        .photo-frame { width: 100mm; height: 65mm; margin: 10px auto; border: 1px solid var(--rosa); overflow: hidden; display: flex; align-items: center; justify-content: center; background: #fff; }
+        .photo-frame img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+        .biometros-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        .img-box-pdf { width: 100%; height: 50mm; border: 1px solid var(--rosa); object-fit: contain; background: #fff; }
+
+        .chakras-list-pdf { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 10.5px; margin-top: 10px; }
+        .chakra-item { border-left: 3px solid var(--rosa-fuerte); padding-left: 8px; margin-bottom: 5px; }
+
+        .footer-sig { text-align: center; margin-top: auto; border-top: 1px solid var(--rosa); padding-top: 15px; }
+        .sig-name { font-family: 'Great Vibes', cursive; font-size: 35px; color: var(--rosa-fuerte); margin: 0; }
+    </style>
+</head>
+<body>
+
+<div class="admin-panel">
+    <h2 style="font-family: 'Cinzel'; text-align: center; color: var(--rosa-fuerte);">Sanación 11.11 - Generador Mejorado</h2>
+    
+    <div class="grid">
+        <div><label>Consultante</label><input id="nombre" value="Tatiana Zayas"></div>
+        <div><label>Fecha de Nacimiento</label><input id="fecha" value="06/03/1993"></div>
+        
+        <div><label>Foto Cartas (Hoja 1)</label><input type="file" accept="image/*" onchange="loadImg(event, 'outFotoCartas')"></div>
+        <div><label>2 Fotos Biómetros (Hoja 2)</label><input type="file" accept="image/*" multiple onchange="loadMultipleImgs(event, 'gridBiometros', 2)"></div>
+        <div><label>2 Fotos Chakras/Cuerpos (Hoja 3)</label><input type="file" accept="image/*" multiple onchange="loadMultipleImgs(event, 'gridChakrasImg', 2)"></div>
+        <div><label>Foto Cruz de Ankh (Hoja 4)</label><input type="file" accept="image/*" onchange="loadImg(event, 'outFotoAnkh')"></div>
+
+        <div style="grid-column: span 2;"><hr style="border: 1px solid var(--rosa);"></div>
+
+        <div><label>Bovis Inicial</label><input id="bIni" value="3.000"></div>
+        <div><label>Bovis Final</label><input id="bFin" value="45.000"></div>
+
+        <div style="grid-column: span 2;">
+            <label>Desbloqueos Realizados</label>
+            <div id="check_desbloqueos" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; font-size: 10px;">
+                <label><input type="checkbox" id="chk_ag" checked> Agresiones</label>
+                <label><input type="checkbox" id="chk_mo" checked> Mal de Ojo</label>
+                <label><input type="checkbox" id="chk_en" checked> Envidia</label>
+                <label><input type="checkbox" id="chk_mps" checked> Magia Psi.</label>
+                <label><input type="checkbox" id="chk_mri"> Magia Rit.</label>
+                <label><input type="checkbox" id="chk_de" checked> Desencarnados</label>
+                <label><input type="checkbox" id="chk_ei" checked> Esp. Invasor</label>
+                <label><input type="checkbox" id="chk_ba" checked> Bajo Astral</label>
+            </div>
+        </div>
+
+        <div style="grid-column: span 2;">
+            <label>Chakras Alineados (Los 12 marcados por defecto)</label>
+            <div id="check_chakras" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; font-size: 10px;">
+                <label><input type="checkbox" class="chk-ch" data-name="Estrella del Alma" data-desc="Conexión con la sabiduría divina." checked> 1. Est. Alma</label>
+                <label><input type="checkbox" class="chk-ch" data-name="Corona" data-desc="Espiritualidad y conexión cósmica." checked> 2. Corona</label>
+                <label><input type="checkbox" class="chk-ch" data-name="Tercer Ojo" data-desc="Intuición y percepción interna." checked> 3. T. Ojo</label>
+                <label><input type="checkbox" class="chk-ch" data-name="Laríngeo" data-desc="Comunicación y verdad personal." checked> 4. Laríngeo</label>
+                <label><input type="checkbox" class="chk-ch" data-name="Timo" data-desc="Sede de la compasión universal." checked> 5. Timo</label>
+                <label><input type="checkbox" class="chk-ch" data-name="Corazón" data-desc="Amor incondicional y equilibrio." checked> 6. Corazón</label>
+                <label><input type="checkbox" class="chk-ch" data-name="Plexo Solar" data-desc="Poder personal y voluntad." checked> 7. Plexo Solar</label>
+                <label><input type="checkbox" class="chk-ch" data-name="Sacro" data-desc="Creatividad y vitalidad sexual." checked> 8. Sacro</label>
+                <label><input type="checkbox" class="chk-ch" data-name="Raíz" data-desc="Seguridad y anclaje a la tierra." checked> 9. Raíz</label>
+                <label><input type="checkbox" class="chk-ch" data-name="Estrella de la Tierra" data-desc="Conexión con Gaia y sustento." checked> 10. Est. Tierra</label>
+                <label><input type="checkbox" class="chk-ch" data-name="Chakra Transpersonal" data-desc="Apertura a la luz espiritual." checked> 11. Transpers.</label>
+                <label><input type="checkbox" class="chk-ch" data-name="Puerta de las Estrellas" data-desc="Acceso a la consciencia pura." checked> 12. P. Estrellas</label>
+            </div>
+        </div>
+
+        <div style="grid-column: span 2;">
+            <label>Seleccionar Síntesis Predefinida</label>
+            <select onchange="document.getElementById('out_sin').value = this.value">
+                <option value="">-- Elige una --</option>
+                <option value="Desde lo Espiritual: Tu alma ha dado un salto cuántico hoy. Has recuperado fragmentos de tu esencia que estaban dispersos, permitiendo que tu luz original vuelva a guiar tu camino sin interferencias externas.">Espiritual</option>
+                <option value="Desde lo Emocional: Se ha liberado una carga ancestral que pesaba en tu corazón. Hoy comienza un periodo de alivio donde tus decisiones nacerán desde la paz y no desde el miedo acumulado.">Emocional</option>
+                <option value="Desde el Poder Personal: Has recuperado el mando de tu campo energético. Al limpiar larvas y parásitos astrales, tu voluntad se fortalece para concretar proyectos antes frenados.">Poder Personal</option>
+                <option value="Desde la Salud y Vitalidad: El trabajo se centró en restaurar el flujo de vida en tus órganos y células. Se eliminaron densidades que agotaban tu sistema inmune, permitiendo que tu cuerpo físico recupere su capacidad natural de regeneración.">Salud</option>
+                <option value="Desde la Proyección Futura: El camino está despejado. Esta sanación actúa como una siembra: los frutos de éxito están listos para manifestarse ahora que la maleza energética fue removida.">Proyección</option>
+            </select>
+            <textarea id="out_sin" rows="3"></textarea>
+        </div>
+
+        <div style="grid-column: span 2;">
+            <label>Seleccionar Recomendación</label>
+            <select onchange="document.getElementById('out_rec').value = this.value">
+                <option value="">-- Elige una --</option>
+                <option value="Protocolo de Sellado: Realizar durante 3 días un baño con sal gruesa y hojas de laurel. Al terminar, visualiza una esfera dorada decretando: 'Mi campo es impenetrable y solo el amor reside en mí'.">Sellado Áurico</option>
+                <option value="Protocolo de Elevación: Evita ambientes densos por 48hs. Escucha frecuencias 528Hz al dormir para que tus células se recalibren con la nueva vibración lograda.">Frecuencia Vibratoria</option>
+                <option value="Protocolo de Transmutación: Escribe lo liberado hoy y quémalo con una vela violeta. Esparce las cenizas en tierra agradeciendo por transformar lo viejo en vida nueva.">Cierre Simbólico</option>
+            </select>
+            <textarea id="out_rec" rows="3"></textarea>
+        </div>
+    </div>
+    <button class="btn-magic" onclick="renderPDF()">GENERAR REPORTE SAGRADO (LETRAS MÁS GRANDES)</button>
+</div>
+
+<div id="pdf-render-area">
+    <div class="pdf-page" id="hoja1">
+        <div class="inner-border">
+            <div class="pdf-header"><h1>SANACIÓN 11.11</h1><p>Lectura Evolutiva</p></div>
+            <div class="pdf-text">
+                <p><span class="negrita">Consultante:</span> <span id="p1_nombre"></span></p>
+                <p><span class="negrita">Fecha de Nacimiento:</span> <span id="p1_fecha"></span></p>
+                <p>Esta lectura identifica las energías operando en tu presente para transformarlas. La <span class="negrita">Carta Central</span> marca el clima de tu alma.</p>
+            </div>
+            <div class="photo-frame"><img id="outFotoCartas"></div>
+            <div class="pdf-text" style="background: #fffafa; padding: 12px; border: 1px dashed var(--rosa); margin-top: 20px;">
+                <p>🎙️ <b>DEVOLUCIÓN EN AUDIO:</b> Adjunto encontrarás el audio interpretativo con los mensajes de los Arcanos.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="pdf-page" id="hoja2">
+        <div class="inner-border">
+            <div class="pdf-header"><h1>PÉNDULO KARNAK</h1><p>Radiónica y Transmutación</p></div>
+            <div class="pdf-text">Transmutación de bloqueos antes de que lleguen al cuerpo físico.</div>
+            <div style="display: flex; justify-content: space-around; background: var(--rosa); padding: 12px; border-radius: 8px; margin: 15px 0;">
+                <div style="text-align: center;"><small>INICIAL</small><br><b id="p2_bini" style="color: var(--rosa-fuerte); font-size: 16px;"></b></div>
+                <div style="text-align: center;"><small>FINAL</small><br><b id="p2_bfin" style="color: var(--rosa-fuerte); font-size: 16px;"></b></div>
+            </div>
+            <div class="pdf-section-title">DESBLOQUEOS REALIZADOS</div>
+            <div id="p2_glosario" class="pdf-text" style="font-size: 10px;"></div>
+            <div class="biometros-grid" id="gridBiometros"></div>
+        </div>
+    </div>
+
+    <div class="pdf-page" id="hoja3">
+        <div class="inner-border">
+            <div class="pdf-header"><h1>CENTROS DE ENERGÍA</h1><p>Alineación de Chakras</p></div>
+            <div class="pdf-text">Poseemos 4 cuerpos principales: Físico, Mental, Emocional y Etérico.</div>
+            <div class="biometros-grid" id="gridChakrasImg"></div>
+            <div class="pdf-section-title">CHAKRAS RECALIBRADOS</div>
+            <div class="chakras-list-pdf" id="p3_chakras_list"></div>
+        </div>
+    </div>
+
+    <div class="pdf-page" id="hoja4">
+        <div class="inner-border">
+            <div class="pdf-header"><h1>CRUZ DE ANKH</h1><p>La Llave de la Vida</p></div>
+            <div class="pdf-text">
+                <p>Realizamos una apertura de caminos, limpieza profunda del campo áurico y sellado del campo electromagnético.</p>
+            </div>
+            <div class="photo-frame"><img id="outFotoAnkh"></div>
+        </div>
+    </div>
+
+    <div class="pdf-page" id="hoja5">
+        <div class="inner-border">
+            <div class="pdf-header"><h1>INTEGRACIÓN</h1><p>Mensaje Final</p></div>
+            <div class="pdf-section-title">SÍNTESIS DE TU PROCESO</div>
+            <div id="p5_sin" class="pdf-text" style="background: #fff5f8; padding: 20px; border-radius: 10px; font-style: italic; font-size: 13px;"></div>
+            <div class="pdf-section-title">RECOMENDACIONES SAGRADAS</div>
+            <div id="p5_rec" class="pdf-text" style="color: var(--oro); font-weight: 600; font-size: 14px; margin-top: 15px;"></div>
+            <div class="footer-sig">
+                <p class="sig-name">Clara</p>
+                <p style="font-size: 14px; font-weight: bold; color: var(--rosa-fuerte); margin: 0;">Sanación 11.11 | Mar del Plata</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function loadImg(e, id) {
+    const reader = new FileReader();
+    reader.onload = () => { document.getElementById(id).src = reader.result; }
+    reader.readAsDataURL(e.target.files[0]);
+}
+
+function loadMultipleImgs(e, containerId, max) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = "";
+    const files = e.target.files;
+    for(let i=0; i<Math.min(files.length, max); i++) {
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+            const img = document.createElement('img');
+            img.src = ev.target.result;
+            img.className = "img-box-pdf";
+            container.appendChild(img);
+        };
+        reader.readAsDataURL(files[i]);
+    }
+}
+
+const DESCRIPCIONES = {
+    chk_ag: ["Agresiones Psicodinámicas", "Conflictos internos o autoataques energéticos."],
+    chk_mo: ["Mal de Ojo", "Carga negativa proyectada por terceros."],
+    chk_en: ["Envidia", "Frecuencias densas que actúan como lastre."],
+    chk_mps: ["Magia Psíquica", "Influencias mentales ajenas."],
+    chk_mri: ["Magia Ritual", "Trabajos intencionados para bloquear flujo."],
+    chk_de: ["Desencarnados", "Almas no trascendidas adheridas al campo."],
+    chk_ei: ["Espíritu Invasor", "Entidad externa que nubla la intuición."],
+    chk_ba: ["Bajo Astral", "Frecuencias de miedo o ira."]
+};
+
+async function renderPDF() {
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    
+    document.getElementById("p1_nombre").innerText = document.getElementById("nombre").value;
+    document.getElementById("p1_fecha").innerText = document.getElementById("fecha").value;
+    document.getElementById("p2_bini").innerText = document.getElementById("bIni").value;
+    document.getElementById("p2_bfin").innerText = document.getElementById("bFin").value;
+    document.getElementById("p5_sin").innerText = document.getElementById("out_sin").value;
+    document.getElementById("p5_rec").innerText = "✨ " + document.getElementById("out_rec").value;
+
+    let glosHTML = "";
+    for(let id in DESCRIPCIONES) {
+        if(document.getElementById(id).checked) glosHTML += `<p><b>${DESCRIPCIONES[id][0]}:</b> ${DESCRIPCIONES[id][1]}</p>`;
+    }
+    document.getElementById("p2_glosary").innerHTML = glosHTML;
+
+    let chkHTML = "";
+    document.querySelectorAll('.chk-ch').forEach(el => {
+        if(el.checked) chkHTML += `<div class="chakra-item"><b>${el.dataset.name}:</b> ${el.dataset.desc}</div>`;
+    });
+    document.getElementById("p3_chakras_list").innerHTML = chkHTML;
+
+    const hojas = ["hoja1", "hoja2", "hoja3", "hoja4", "hoja5"];
+    for(let i=0; i<hojas.length; i++) {
+        const canvas = await html2canvas(document.getElementById(hojas[i]), { scale: 2 });
+        const img = canvas.toDataURL('image/jpeg', 0.9);
+        if(i > 0) pdf.addPage();
+        pdf.addImage(img, 'JPEG', 0, 0, 210, 297);
+    }
+    pdf.save(`Reporte_11.11_${document.getElementById("nombre").value}.pdf`);
+}
+</script>
+</body>
+</html>
