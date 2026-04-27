@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Sanación 11.11 - Reporte Premium v3.4</title>
+    <title>Sanación 11.11 - Reporte Premium v3.5</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
@@ -46,7 +46,7 @@
 <body>
 
 <div class="admin-panel">
-    <h2 style="font-family: 'Cinzel'; text-align: center; color: var(--rosa-fuerte);">Sanación 11.11 - Generador Premium v3.4</h2>
+    <h2 style="font-family: 'Cinzel'; text-align: center; color: var(--rosa-fuerte);">Sanación 11.11 - Generador Premium v3.5</h2>
     
     <div class="grid">
         <div><label>Consultante</label><input id="nombre" value="Gloria Estefania Villalonga"></div>
@@ -99,7 +99,7 @@
             <textarea id="out_rec" rows="2" placeholder="Escribe aquí o selecciona del menú..."></textarea>
         </div>
     </div>
-    <button class="btn-magic" onclick="renderPDF()">GENERAR PDF SAGRADO v3.4</button>
+    <button class="btn-magic" onclick="renderPDF()">GENERAR PDF v3.5 (CHAKRAS RESTAURADOS)</button>
 </div>
 
 <div id="pdf-render-area">
@@ -109,19 +109,15 @@
             <div class="pdf-text">
                 <p style="margin-bottom: 5px;"><span class="negrita">Consultante:</span> <span id="p1_nombre"></span></p>
                 <p style="margin-bottom: 15px;"><span class="negrita">Fecha de Nacimiento:</span> <span id="p1_fecha"></span></p>
-                
                 <span class="mini-title">La Energía Base</span>
                 <p><b>Carta Central (Mazo):</b> Representa el clima general de la consulta y la energía principal que envuelve tu proceso actual.</p>
-                
                 <span class="mini-title">Interpretación de las Cartas</span>
                 <p>• <b>Al Derecho:</b> Energía fluida, activa y disponible para ser utilizada.<br>
                    • <b>Invertida:</b> Señala un bloqueo, resistencia o un aspecto que requiere mayor atención y trabajo interno.</p>
-
                 <span class="mini-title">Estructura del Recorrido (Rueda Zodiacal)</span>
                 <p><b>Presente (De Aries a Virgo):</b> Refleja tu realidad inmediata. Cómo te encuentras hoy y de qué manera se están manifestando las situaciones en tu vida actual.</p>
-                <p><b>Futuro (De Libra a Piscis):</b> Muestra las proyecciones y tendencias. Hacia dónde se dirige tu energía y cuáles son los posibles desarrollos de los temas consultados.</p>
-
-                <p style="margin-top: 10px; font-style: italic; border-top: 1px solid var(--rosa); padding-top: 10px;"><b>Propósito Evolutivo:</b> Esta lectura no es solo predictiva; busca brindarte claridad y consciencia para que puedas accionar sobre tu presente y transformar tu futuro.</p>
+                <p><b>Futuro (De Libra a Piscis):</b> Muestra las proyecciones y tendencias.</p>
+                <p style="margin-top: 10px; font-style: italic; border-top: 1px solid var(--rosa); padding-top: 10px;"><b>Propósito Evolutivo:</b> Brindarte claridad para que puedas accionar sobre tu presente y transformar tu futuro.</p>
             </div>
             <div class="photo-frame"><img id="outFotoCartas"></div>
         </div>
@@ -135,7 +131,7 @@
                 <div style="text-align: center;"><small>BOVIS FINAL</small><br><b id="p2_bfin" style="color: var(--rosa-fuerte); font-size: 20px;"></b></div>
             </div>
             <div class="pdf-section-title">DESBLOQUEOS REALIZADOS</div>
-            <div id="p2_glosario" class="pdf-text" style="font-size: 11px;"></div>
+            <div id="p2_glosario" class="pdf-text" style="font-size: 11.5px;"></div>
             <div class="biometros-grid" id="gridBiometros"></div>
         </div>
     </div>
@@ -153,12 +149,11 @@
         <div class="inner-border">
             <div class="pdf-header"><h1>CRUZ DE ANKH</h1><p>La Llave de la Vida</p></div>
             <div class="pdf-text">
-                <p>Realizamos una apertura de caminos con la Cruz de Ankh, un poderoso símbolo de sanación cuyo significado es "Vida".</p>
-                <p>Con ella efectuamos una limpieza profunda del campo áurico, el corte de lazos o cordones energéticos que drenaban tu vitalidad y el sellado del campo electromagnético. Esta técnica permite elevar tus frecuencias, energizar tus proyectos y restaurar el flujo sagrado en tu ser.</p>
+                <p>Realizamos una apertura de caminos con la Cruz de Ankh, cuyo significado es "Vida". Efectuamos una limpieza profunda del campo áurico, el corte de lazos energéticos que drenaban tu vitalidad y el sellado del campo electromagnético para restaurar tu flujo sagrado.</p>
             </div>
             <div class="photo-frame"><img id="outFotoAnkh"></div>
             <div class="pdf-text" style="font-style: italic; text-align: center; margin-top: 15px; color: var(--rosa-fuerte);">
-                "La Cruz de Ankh actúa como un puente entre el cielo y la tierra en tu propia columna vertebral."
+                "La Cruz de Ankh actúa como un puente entre el cielo y la tierra."
             </div>
         </div>
     </div>
@@ -212,6 +207,22 @@ const DESCRIPCIONES = {
     chk_ba: ["Bajo Astral", "Frecuencias de miedo o ira."]
 };
 
+// Lista de los 12 chakras
+const CHAKRAS_DATA = [
+    { name: "Estrella del Alma", desc: "Conexión con la sabiduría divina." },
+    { name: "Corona", desc: "Espiritualidad y conexión cósmica." },
+    { name: "Tercer Ojo", desc: "Intuición y percepción interna." },
+    { name: "Laríngeo", desc: "Comunicación y verdad personal." },
+    { name: "Timo", desc: "Sede de la compasión universal." },
+    { name: "Corazón", desc: "Amor incondicional y equilibrio." },
+    { name: "Plexo Solar", desc: "Poder personal y voluntad." },
+    { name: "Sacro", desc: "Creatividad y vitalidad sexual." },
+    { name: "Raíz", desc: "Seguridad y anclaje a la tierra." },
+    { name: "Estrella de la Tierra", desc: "Conexión con Gaia y sustento." },
+    { name: "Transpersonal", desc: "Apertura a la luz espiritual." },
+    { name: "Puerta de las Estrellas", desc: "Acceso a la consciencia pura." }
+];
+
 async function renderPDF() {
     try {
         const { jsPDF } = window.jspdf;
@@ -224,6 +235,7 @@ async function renderPDF() {
         document.getElementById("p5_sin").innerText = document.getElementById("out_sin").value;
         document.getElementById("p5_rec").innerText = "✨ " + document.getElementById("out_rec").value;
 
+        // Glosario Desbloqueos
         let glosHTML = "";
         for(let id in DESCRIPCIONES) {
             if(document.getElementById(id).checked) {
@@ -232,10 +244,10 @@ async function renderPDF() {
         }
         document.getElementById("p2_glosario").innerHTML = glosHTML;
 
+        // Lista Chakras (Forzando la generación de los 12)
         let chkHTML = "";
-        document.querySelectorAll('.chk-ch').forEach(el => {
-            // Nota: Estos checkboxes están ocultos en el render pero activos en el panel, así que funciona
-            chkHTML += `<div class="chakra-item"><b>${el.dataset.name}:</b> ${el.dataset.desc}</div>`;
+        CHAKRAS_DATA.forEach(ch => {
+            chkHTML += `<div class="chakra-item"><b>${ch.name}:</b> ${ch.desc}</div>`;
         });
         document.getElementById("p3_chakras_list").innerHTML = chkHTML;
 
