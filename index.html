@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Sanación 11.11 - Reporte Premium v3.5</title>
+    <title>Sanación 11.11 - Reporte Premium v3.6</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
@@ -25,19 +25,20 @@
         .pdf-header { text-align: center; margin-bottom: 10px; border-bottom: 1px solid var(--rosa); padding-bottom: 8px; }
         .pdf-header h1 { font-family: 'Cinzel', serif; color: var(--rosa-fuerte); margin: 0; font-size: 26px; letter-spacing: 4px; }
         
-        .pdf-section-title { font-family: 'Cinzel', serif; color: var(--blanco); background: var(--rosa-fuerte); margin: 12px 0 8px; font-size: 13px; padding: 6px 15px; border-radius: 5px; text-align: center; }
-        .pdf-text { font-size: 13.5px; line-height: 1.5; text-align: justify; }
+        .pdf-section-title { font-family: 'Cinzel', serif; color: var(--blanco); background: var(--rosa-fuerte); margin: 10px 0 8px; font-size: 13px; padding: 6px 15px; border-radius: 5px; text-align: center; }
+        .pdf-text { font-size: 13.5px; line-height: 1.45; text-align: justify; }
         .negrita { font-weight: 700; color: var(--rosa-fuerte); }
-        .mini-title { font-weight: 700; color: var(--oro); display: block; margin-top: 8px; font-size: 12px; text-transform: uppercase; }
+        .mini-title { font-weight: 700; color: var(--oro); display: block; margin-top: 6px; font-size: 12px; text-transform: uppercase; }
 
-        .photo-frame { width: 100mm; height: 60mm; margin: 8px auto; border: 1px solid var(--rosa); overflow: hidden; display: flex; align-items: center; justify-content: center; background: #fff; }
+        /* FOTOS PDF */
+        .photo-frame { width: 100mm; height: 55mm; margin: 8px auto; border: 1px solid var(--rosa); overflow: hidden; display: flex; align-items: center; justify-content: center; background: #fff; }
         .photo-frame img { max-width: 100%; max-height: 100%; object-fit: contain; }
 
-        .biometros-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-        .img-box-pdf { width: 100%; height: 50mm; border: 1px solid var(--rosa); object-fit: contain; background: #fff; }
+        .biometros-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; width: 100%; }
+        .img-box-pdf { width: 100%; height: 48mm; border: 1px solid var(--rosa); object-fit: contain; background: #fff; }
 
-        .chakras-list-pdf { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 11px; margin-top: 8px; }
-        .chakra-item { border-left: 3px solid var(--rosa-fuerte); padding-left: 8px; margin-bottom: 3px; }
+        .chakras-list-pdf { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 11px; margin-top: 6px; }
+        .chakra-item { border-left: 3px solid var(--rosa-fuerte); padding-left: 8px; margin-bottom: 2px; }
 
         .footer-sig { text-align: center; margin-top: auto; border-top: 1px solid var(--rosa); padding-top: 10px; }
         .sig-name { font-family: 'Great Vibes', cursive; font-size: 35px; color: var(--rosa-fuerte); margin: 0; }
@@ -46,7 +47,7 @@
 <body>
 
 <div class="admin-panel">
-    <h2 style="font-family: 'Cinzel'; text-align: center; color: var(--rosa-fuerte);">Sanación 11.11 - Generador Premium v3.5</h2>
+    <h2 style="font-family: 'Cinzel'; text-align: center; color: var(--rosa-fuerte);">Sanación 11.11 - Generador Premium v3.6</h2>
     
     <div class="grid">
         <div><label>Consultante</label><input id="nombre" value="Gloria Estefania Villalonga"></div>
@@ -85,7 +86,7 @@
                 <option value="El enfoque de hoy fue el corte de lazos y la recuperación de fragmentos de vitalidad que se habían quedado anclados en eventos del pasado. Al liberar estas fugas de energía, tu sistema recupera su centro y su potencia original. Esta limpieza no solo trae alivio inmediato, sino que abre una ventana de oportunidad para que manifiestes tus proyectos con una fuerza renovada. Ya no estás operando desde la reserva, sino desde la abundancia de tu propia luz, permitiendo un flujo de vida mucho más armónico.">Recuperación de Vitalidad</option>
                 <option value="Hemos trabajado en la profundidad de tus centros energéticos para desactivar memorias de estancamiento que se reflejaban en tu cuerpo físico y emocional. Esta sanación actúa como un reseteo profundo: se han disuelto las estructuras rígidas para dar paso a una fluidez nueva. Notarás que tu percepción del entorno cambia, sintiéndote con mayor protección y anclaje. La claridad ganada hoy es la base sobre la cual vas a construir tus próximos pasos, libre de las influencias que antes condicionaban tu camino.">Reseteo y Flujo Nuevo</option>
             </select>
-            <textarea id="out_sin" rows="4" placeholder="Escribe aquí o selecciona del menú..."></textarea>
+            <textarea id="out_sin" rows="4"></textarea>
         </div>
 
         <div style="grid-column: span 2;">
@@ -96,10 +97,10 @@
                 <option value="Protocolo de Elevación: Evita ambientes densos por 48hs. Escucha frecuencias 528Hz al dormir para que tus células se recalibren con la nueva vibración lograda hoy.">Elevación Vibratoria</option>
                 <option value="Protocolo de Transmutación: Escribe en un papel aquello que sientas que ya soltaste hoy y quémalo con una vela blanca o violeta, entregando las cenizas a la tierra.">Cierre Simbólico</option>
             </select>
-            <textarea id="out_rec" rows="2" placeholder="Escribe aquí o selecciona del menú..."></textarea>
+            <textarea id="out_rec" rows="2"></textarea>
         </div>
     </div>
-    <button class="btn-magic" onclick="renderPDF()">GENERAR PDF v3.5 (CHAKRAS RESTAURADOS)</button>
+    <button class="btn-magic" onclick="renderPDF()">GENERAR PDF v3.6 (DOBLE FOTO)</button>
 </div>
 
 <div id="pdf-render-area">
@@ -108,16 +109,16 @@
             <div class="pdf-header"><h1>SANACIÓN 11.11</h1><p>Guía de Lectura Evolutiva</p></div>
             <div class="pdf-text">
                 <p style="margin-bottom: 5px;"><span class="negrita">Consultante:</span> <span id="p1_nombre"></span></p>
-                <p style="margin-bottom: 15px;"><span class="negrita">Fecha de Nacimiento:</span> <span id="p1_fecha"></span></p>
+                <p style="margin-bottom: 12px;"><span class="negrita">Fecha de Nacimiento:</span> <span id="p1_fecha"></span></p>
                 <span class="mini-title">La Energía Base</span>
                 <p><b>Carta Central (Mazo):</b> Representa el clima general de la consulta y la energía principal que envuelve tu proceso actual.</p>
                 <span class="mini-title">Interpretación de las Cartas</span>
                 <p>• <b>Al Derecho:</b> Energía fluida, activa y disponible para ser utilizada.<br>
-                   • <b>Invertida:</b> Señala un bloqueo, resistencia o un aspecto que requiere mayor atención y trabajo interno.</p>
+                   • <b>Invertida:</b> Señala un bloqueo o resistencia que requiere atención.</p>
                 <span class="mini-title">Estructura del Recorrido (Rueda Zodiacal)</span>
-                <p><b>Presente (De Aries a Virgo):</b> Refleja tu realidad inmediata. Cómo te encuentras hoy y de qué manera se están manifestando las situaciones en tu vida actual.</p>
-                <p><b>Futuro (De Libra a Piscis):</b> Muestra las proyecciones y tendencias.</p>
-                <p style="margin-top: 10px; font-style: italic; border-top: 1px solid var(--rosa); padding-top: 10px;"><b>Propósito Evolutivo:</b> Brindarte claridad para que puedas accionar sobre tu presente y transformar tu futuro.</p>
+                <p><b>Presente (Aries-Virgo):</b> Refleja tu realidad inmediata y cómo te encuentras hoy.<br>
+                   <b>Futuro (Libra-Piscis):</b> Muestra las proyecciones y tendencias hacia dónde se dirige tu energía.</p>
+                <p style="margin-top: 10px; font-style: italic; border-top: 1px solid var(--rosa); padding-top: 8px;"><b>Propósito Evolutivo:</b> Brindarte claridad para que puedas accionar sobre tu presente y transformar tu futuro.</p>
             </div>
             <div class="photo-frame"><img id="outFotoCartas"></div>
         </div>
@@ -126,12 +127,12 @@
     <div class="pdf-page" id="hoja2">
         <div class="inner-border">
             <div class="pdf-header"><h1>PÉNDULO KARNAK</h1><p>Radiónica y Transmutación</p></div>
-            <div style="display: flex; justify-content: space-around; background: var(--rosa); padding: 10px; border-radius: 8px; margin: 10px 0;">
+            <div style="display: flex; justify-content: space-around; background: var(--rosa); padding: 8px; border-radius: 8px; margin: 8px 0;">
                 <div style="text-align: center;"><small>BOVIS INICIAL</small><br><b id="p2_bini" style="color: var(--rosa-fuerte); font-size: 20px;"></b></div>
                 <div style="text-align: center;"><small>BOVIS FINAL</small><br><b id="p2_bfin" style="color: var(--rosa-fuerte); font-size: 20px;"></b></div>
             </div>
             <div class="pdf-section-title">DESBLOQUEOS REALIZADOS</div>
-            <div id="p2_glosario" class="pdf-text" style="font-size: 11.5px;"></div>
+            <div id="p2_glosario" class="pdf-text" style="font-size: 11px;"></div>
             <div class="biometros-grid" id="gridBiometros"></div>
         </div>
     </div>
@@ -207,7 +208,6 @@ const DESCRIPCIONES = {
     chk_ba: ["Bajo Astral", "Frecuencias de miedo o ira."]
 };
 
-// Lista de los 12 chakras
 const CHAKRAS_DATA = [
     { name: "Estrella del Alma", desc: "Conexión con la sabiduría divina." },
     { name: "Corona", desc: "Espiritualidad y conexión cósmica." },
@@ -235,16 +235,14 @@ async function renderPDF() {
         document.getElementById("p5_sin").innerText = document.getElementById("out_sin").value;
         document.getElementById("p5_rec").innerText = "✨ " + document.getElementById("out_rec").value;
 
-        // Glosario Desbloqueos
         let glosHTML = "";
         for(let id in DESCRIPCIONES) {
             if(document.getElementById(id).checked) {
-                glosHTML += `<p style="margin-bottom:4px"><b>${DESCRIPCIONES[id][0]}:</b> ${DESCRIPCIONES[id][1]}</p>`;
+                glosHTML += `<p style="margin-bottom:3px"><b>${DESCRIPCIONES[id][0]}:</b> ${DESCRIPCIONES[id][1]}</p>`;
             }
         }
         document.getElementById("p2_glosario").innerHTML = glosHTML;
 
-        // Lista Chakras (Forzando la generación de los 12)
         let chkHTML = "";
         CHAKRAS_DATA.forEach(ch => {
             chkHTML += `<div class="chakra-item"><b>${ch.name}:</b> ${ch.desc}</div>`;
@@ -254,7 +252,7 @@ async function renderPDF() {
         const hojas = ["hoja1", "hoja2", "hoja3", "hoja4", "hoja5"];
         for(let i=0; i<hojas.length; i++) {
             const canvas = await html2canvas(document.getElementById(hojas[i]), { scale: 2 });
-            const img = canvas.toDataURL('image/jpeg', 0.9);
+            const img = canvas.toDataURL('image/jpeg', 0.92);
             if(i > 0) pdf.addPage();
             pdf.addImage(img, 'JPEG', 0, 0, 210, 297);
         }
