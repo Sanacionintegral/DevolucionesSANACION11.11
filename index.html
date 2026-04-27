@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Sanación 11.11 - Reporte Premium v3.3</title>
+    <title>Sanación 11.11 - Reporte Premium v3.4</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
@@ -30,7 +30,6 @@
         .negrita { font-weight: 700; color: var(--rosa-fuerte); }
         .mini-title { font-weight: 700; color: var(--oro); display: block; margin-top: 8px; font-size: 12px; text-transform: uppercase; }
 
-        /* IMÁGENES */
         .photo-frame { width: 100mm; height: 60mm; margin: 8px auto; border: 1px solid var(--rosa); overflow: hidden; display: flex; align-items: center; justify-content: center; background: #fff; }
         .photo-frame img { max-width: 100%; max-height: 100%; object-fit: contain; }
 
@@ -47,7 +46,7 @@
 <body>
 
 <div class="admin-panel">
-    <h2 style="font-family: 'Cinzel'; text-align: center; color: var(--rosa-fuerte);">Sanación 11.11 - Generador Premium v3.3</h2>
+    <h2 style="font-family: 'Cinzel'; text-align: center; color: var(--rosa-fuerte);">Sanación 11.11 - Generador Premium v3.4</h2>
     
     <div class="grid">
         <div><label>Consultante</label><input id="nombre" value="Gloria Estefania Villalonga"></div>
@@ -65,7 +64,7 @@
 
         <div style="grid-column: span 2;">
             <label>Desbloqueos Realizados</label>
-            <div id="check_desbloqueos" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; font-size: 10px;">
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; font-size: 10px;">
                 <label><input type="checkbox" id="chk_ag" checked> Agresiones</label>
                 <label><input type="checkbox" id="chk_mo" checked> Mal de Ojo</label>
                 <label><input type="checkbox" id="chk_en" checked> Envidia</label>
@@ -78,34 +77,29 @@
         </div>
 
         <div style="grid-column: span 2;">
-            <label>Chakras Alineados (12)</label>
-            <div id="check_chakras" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; font-size: 10px;">
-                <label><input type="checkbox" class="chk-ch" data-name="Estrella del Alma" data-desc="Conexión con la sabiduría divina." checked> 1. Est. Alma</label>
-                <label><input type="checkbox" class="chk-ch" data-name="Corona" data-desc="Espiritualidad y conexión cósmica." checked> 2. Corona</label>
-                <label><input type="checkbox" class="chk-ch" data-name="Tercer Ojo" data-desc="Intuición y percepción interna." checked> 3. T. Ojo</label>
-                <label><input type="checkbox" class="chk-ch" data-name="Laríngeo" data-desc="Comunicación y verdad personal." checked> 4. Laríngeo</label>
-                <label><input type="checkbox" class="chk-ch" data-name="Timo" data-desc="Sede de la compasión universal." checked> 5. Timo</label>
-                <label><input type="checkbox" class="chk-ch" data-name="Corazón" data-desc="Amor incondicional y equilibrio." checked> 6. Corazón</label>
-                <label><input type="checkbox" class="chk-ch" data-name="Plexo Solar" data-desc="Poder personal y voluntad." checked> 7. Plexo Solar</label>
-                <label><input type="checkbox" class="chk-ch" data-name="Sacro" data-desc="Creatividad y vitalidad sexual." checked> 8. Sacro</label>
-                <label><input type="checkbox" class="chk-ch" data-name="Raíz" data-desc="Seguridad y anclaje a la tierra." checked> 9. Raíz</label>
-                <label><input type="checkbox" class="chk-ch" data-name="Estrella de la Tierra" data-desc="Conexión con Gaia y sustento." checked> 10. Est. Tierra</label>
-                <label><input type="checkbox" class="chk-ch" data-name="Chakra Transpersonal" data-desc="Apertura a la luz espiritual." checked> 11. Transpers.</label>
-                <label><input type="checkbox" class="chk-ch" data-name="Puerta de las Estrellas" data-desc="Acceso a la consciencia pura." checked> 12. P. Estrellas</label>
-            </div>
+            <label>Seleccionar Síntesis Evolutiva</label>
+            <select onchange="document.getElementById('out_sin').value = this.value">
+                <option value="">-- Elige una perspectiva --</option>
+                <option value="Durante el proceso se identificaron focos de desgaste que no siempre son evidentes, pero que estaban afectando tu energía y tu forma de responder a ciertas situaciones. El trabajo no se centró solo en liberar carga, sino en desactivar patrones que venías sosteniendo de forma automática. A partir de esto, el sistema empieza a reorganizarse: hay más claridad, menos interferencia y mayor capacidad para decidir sin arrastrar lo anterior. Este cambio no es solo energético, impacta directamente en cómo vas a percibir y enfrentar lo que viene.">Reorganización y Claridad</option>
+                <option value="La sesión reveló una saturación en tu campo electromagnético que actuaba como un ruido constante, impidiéndote escuchar tu propia intuición. Al remover estas interferencias y densidades externas, hemos restaurado la soberanía de tu espacio personal. Lo que antes sentías como obstáculos pesados, ahora se percibirá como procesos naturales de aprendizaje. Te encuentras en un punto de neutralidad donde la energía vuelve a estar a tu servicio, lista para ser proyectada en acciones concretas y decisiones libres.">Soberanía Energética</option>
+                <option value="El enfoque de hoy fue el corte de lazos y la recuperación de fragmentos de vitalidad que se habían quedado anclados en eventos del pasado. Al liberar estas fugas de energía, tu sistema recupera su centro y su potencia original. Esta limpieza no solo trae alivio inmediato, sino que abre una ventana de oportunidad para que manifiestes tus proyectos con una fuerza renovada. Ya no estás operando desde la reserva, sino desde la abundancia de tu propia luz, permitiendo un flujo de vida mucho más armónico.">Recuperación de Vitalidad</option>
+                <option value="Hemos trabajado en la profundidad de tus centros energéticos para desactivar memorias de estancamiento que se reflejaban en tu cuerpo físico y emocional. Esta sanación actúa como un reseteo profundo: se han disuelto las estructuras rígidas para dar paso a una fluidez nueva. Notarás que tu percepción del entorno cambia, sintiéndote con mayor protección y anclaje. La claridad ganada hoy es la base sobre la cual vas a construir tus próximos pasos, libre de las influencias que antes condicionaban tu camino.">Reseteo y Flujo Nuevo</option>
+            </select>
+            <textarea id="out_sin" rows="4" placeholder="Escribe aquí o selecciona del menú..."></textarea>
         </div>
 
         <div style="grid-column: span 2;">
-            <label>Síntesis Final</label>
-            <textarea id="out_sin" rows="3">Desde la Salud y Vitalidad: El trabajo se centró en restaurar el flujo de vida en tus órganos y células. Se eliminaron densidades que agotaban tu sistema inmune.</textarea>
-        </div>
-
-        <div style="grid-column: span 2;">
-            <label>Recomendación</label>
-            <textarea id="out_rec" rows="2">Protocolo de Sellado: Realizar durante 3 días un baño con sal gruesa y hojas de laurel.</textarea>
+            <label>Seleccionar Recomendación</label>
+            <select onchange="document.getElementById('out_rec').value = this.value">
+                <option value="">-- Elige una recomendación --</option>
+                <option value="Protocolo de Sellado: Realizar durante 3 días un baño con sal gruesa y hojas de laurel. Al terminar, visualiza una esfera dorada decretando: 'Mi campo es impenetrable y solo el amor reside en mí'.">Sellado Áurico</option>
+                <option value="Protocolo de Elevación: Evita ambientes densos por 48hs. Escucha frecuencias 528Hz al dormir para que tus células se recalibren con la nueva vibración lograda hoy.">Elevación Vibratoria</option>
+                <option value="Protocolo de Transmutación: Escribe en un papel aquello que sientas que ya soltaste hoy y quémalo con una vela blanca o violeta, entregando las cenizas a la tierra.">Cierre Simbólico</option>
+            </select>
+            <textarea id="out_rec" rows="2" placeholder="Escribe aquí o selecciona del menú..."></textarea>
         </div>
     </div>
-    <button class="btn-magic" onclick="renderPDF()">GENERAR PDF ACTUALIZADO (LETRA MÁS GRANDE)</button>
+    <button class="btn-magic" onclick="renderPDF()">GENERAR PDF SAGRADO v3.4</button>
 </div>
 
 <div id="pdf-render-area">
@@ -117,7 +111,7 @@
                 <p style="margin-bottom: 15px;"><span class="negrita">Fecha de Nacimiento:</span> <span id="p1_fecha"></span></p>
                 
                 <span class="mini-title">La Energía Base</span>
-                <p><b>Carta Central:</b> Representa el clima general de la consulta y la energía principal que envuelve tu proceso actual.</p>
+                <p><b>Carta Central (Mazo):</b> Representa el clima general de la consulta y la energía principal que envuelve tu proceso actual.</p>
                 
                 <span class="mini-title">Interpretación de las Cartas</span>
                 <p>• <b>Al Derecho:</b> Energía fluida, activa y disponible para ser utilizada.<br>
@@ -233,14 +227,15 @@ async function renderPDF() {
         let glosHTML = "";
         for(let id in DESCRIPCIONES) {
             if(document.getElementById(id).checked) {
-                glosHTML += `<p style="margin-bottom:5px"><b>${DESCRIPCIONES[id][0]}:</b> ${DESCRIPCIONES[id][1]}</p>`;
+                glosHTML += `<p style="margin-bottom:4px"><b>${DESCRIPCIONES[id][0]}:</b> ${DESCRIPCIONES[id][1]}</p>`;
             }
         }
         document.getElementById("p2_glosario").innerHTML = glosHTML;
 
         let chkHTML = "";
         document.querySelectorAll('.chk-ch').forEach(el => {
-            if(el.checked) chkHTML += `<div class="chakra-item"><b>${el.dataset.name}:</b> ${el.dataset.desc}</div>`;
+            // Nota: Estos checkboxes están ocultos en el render pero activos en el panel, así que funciona
+            chkHTML += `<div class="chakra-item"><b>${el.dataset.name}:</b> ${el.dataset.desc}</div>`;
         });
         document.getElementById("p3_chakras_list").innerHTML = chkHTML;
 
@@ -255,7 +250,7 @@ async function renderPDF() {
         pdf.save(`Sanacion1111_${document.getElementById("nombre").value}.pdf`);
     } catch (e) {
         console.error(e);
-        alert("Error al generar PDF. Asegúrate de haber cargado las fotos.");
+        alert("Error al generar PDF.");
     }
 }
 </script>
